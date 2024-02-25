@@ -1,12 +1,10 @@
 import React from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/authContext';
 import { Navigate, Outlet } from 'react-router-dom';
+import { getSavedUser } from '../utils/sessionStorageLogin';
 
 const PrivateRoutes = () => {
-  const { apiToken } = useContext(AuthContext);
-
-  console.log('token api,,,,', apiToken);
+  // const { apiToken } = useContext(AuthContext);
+  const apiToken = getSavedUser('api_token');
 
   return apiToken ? <Outlet /> : <Navigate to="/" />;
 };

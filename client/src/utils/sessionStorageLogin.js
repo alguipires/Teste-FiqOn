@@ -3,7 +3,8 @@ export const getSavedUser = (key) => {
 };
 
 export const saveUser = (key, obj) => {
-  sessionStorage.setItem(key, JSON.stringify(obj));
+  // sessionStorage.setItem(key, JSON.stringify(obj));
+  sessionStorage.setItem(key, obj);
 };
 
 export const removeUser = (key) => {

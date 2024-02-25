@@ -34,4 +34,40 @@ const checkUser = async (email, password) => {
     });
 };
 
-export { checkUser };
+// const getAllPages = async () => {
+//   return await axios
+//     .get(`${endpointGetData}`)
+//     .then((response) => {
+//       return response?.data;
+//     })
+//     .catch((error) => {
+//       return error?.response?.status;
+//     })
+//     .finally(() => {
+//       // always executed
+//     });
+// };
+
+const getAllPages = async (api_token, page) => {
+  console.log('Logg getallPages...', api_token);
+
+  const config = {
+    params: {
+      page: page,
+      api_token: api_token,
+    },
+  };
+  console.log('url params...', config);
+
+  return await axios
+    .get(endpointGetData, config)
+    .then((response) => {
+      console.log('Logg response.data...', response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response ? error.response.status : 'Error';
+    });
+};
+
+export { checkUser, getAllPages };
