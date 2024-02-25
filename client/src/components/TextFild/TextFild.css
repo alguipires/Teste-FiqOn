@@ -1,0 +1,39 @@
+/* TextField.css */
+
+.buscarTags {
+  width: 450px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.buscarTags .MuiTextField-root {
+  width: 100%;
+}
+
+.buscarTags .MuiInputLabel-root {
+  background-color: #ffffff; 
+}
+
+.buscarTags .MuiOutlinedInput-notchedOutline {
+  border-color: #ccc;
+}
+
+@media only screen and (max-width: 600px) {
+  .buscarTags {
+    width: 90vw;
+    display: flex;
+    align-items: center;
+  }
+  
+  .buscarTags .MuiTextField-root {
+    width: 89vw;
+  }
+  
+  .buscarTags .MuiInputLabel-root {
+    background-color: #ffffff; 
+  }
+  
+  .buscarTags .MuiOutlinedInput-notchedOutline {
+    border-color: #ccc;
+  }
+}
