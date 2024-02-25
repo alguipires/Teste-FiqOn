@@ -1,0 +1,68 @@
+.portifolio_container{
+  width: 100%;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: baseline;
+  overflow-y: auto;
+}
+
+.container_profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+  margin-top: 50px;
+}
+
+.container_my_project {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.container_basic_card {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 100px; 
+  width: 100%;
+  margin-top: 20px;
+}
+
+.container_text_my_projects{
+  font-weight: normal;
+  padding-bottom: 10px;
+  font-size: 30px;
+  color: rgb(90, 83, 83);
+}
+
+
+@media screen and (max-width: 768px) {
+  .container_text_my_projects{
+    padding-bottom: 10px;
+    font-size: 25px;
+    color: rgb(90, 83, 83);
+  }
+
+  .container_input_search {
+    width: 100%;
+  }
+
+  .container_basic_card {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 30px; 
+  }
+  
+}
+
+@media screen and (min-width: 768px) and (max-width: 1600px) {
+  .container_basic_card {
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
