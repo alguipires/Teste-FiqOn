@@ -24,16 +24,17 @@ function List() {
   const getAllPages = async () => {
     let numPage = 0;
     var currentPage = null;
+    var listPages = [];
 
     do {
       currentPage = await getPage(apiToken, numPage);
-      console.log('Log DO while currentPage...', currentPage); //TODO remover
-      setListPages((prePage) => [...prePage, currentPage.data]);
+      listPages.push(currentPage.data); // Adicionando as páginas no array
+      // setListPages((prePage) => [...prePage, currentPage.data]); // Adicionando as páginas no array um por uma autlizando o estado
       numPage++;
     } while (currentPage.more_items === 'true');
-  };
 
-  console.log('Log ListPages linha 30...', listPages); //TODO remover
+    setListPages(listPages); // Adicionando o array de páginas no estado, atualiza uma vez só
+  };
 
   const renderTable = () => {
     let numMsg = 1;
@@ -90,7 +91,6 @@ function List() {
     e.preventDefault();
     if (hashBase64 !== '') {
       const response = await postBase64Validation(apiToken, hashBase64);
-      console.log('Log response linha 98...', response); //TODO remover
 
       if (
         response.message ===
