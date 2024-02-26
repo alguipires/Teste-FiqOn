@@ -114,7 +114,6 @@ function List() {
         <h2 className="container_text_title">Pilares da cultura da FiqOn</h2>
         {renderTable()}
       </div>
-      /
       <section className="container_validation-list">
         <h2 className="container_text_title">Validação</h2>
 
