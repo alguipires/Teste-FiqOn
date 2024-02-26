@@ -34,35 +34,17 @@ const checkUser = async (email, password) => {
     });
 };
 
-// const getAllPages = async () => {
-//   return await axios
-//     .get(`${endpointGetData}`)
-//     .then((response) => {
-//       return response?.data;
-//     })
-//     .catch((error) => {
-//       return error?.response?.status;
-//     })
-//     .finally(() => {
-//       // always executed
-//     });
-// };
-
-const getAllPages = async (api_token, page) => {
-  console.log('Logg getallPages...', api_token);
-
+const getPage = async (api_token, page) => {
   const config = {
     params: {
       page: page,
       api_token: api_token,
     },
   };
-  console.log('url params...', config);
 
   return await axios
     .get(endpointGetData, config)
     .then((response) => {
-      console.log('Logg response.data...', response.data);
       return response.data;
     })
     .catch((error) => {
@@ -70,4 +52,26 @@ const getAllPages = async (api_token, page) => {
     });
 };
 
-export { checkUser, getAllPages };
+const postBase64Validation = async (api_token, body) => {
+  return await axios
+    .post(
+      endpointPostDataValidation,
+      { answer: body },
+      {
+        params: {
+          api_token: api_token,
+        },
+      }
+    )
+    .then((response) => {
+      return response?.data;
+    })
+    .catch((error) => {
+      return error?.response?.data;
+    })
+    .finally(() => {
+      // always executed
+    });
+};
+
+export { checkUser, getPage, postBase64Validation };
