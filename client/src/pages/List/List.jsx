@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import AppBar from '../../components/Appbar/AppBar';
 import './List.css';
-import { getPage } from '../../api/axiosInstance';
+import { getPage, postBase64Validation } from '../../api/axiosInstance';
 import { getSavedUser } from '../../utils/sessionStorageLogin';
 import Button from '@mui/material/Button';
-// import TextField from '../../components/TextFild/TextFild.jsx';
 import TextField from '@mui/material/TextField';
+import handleAlert from '../../utils/handleAlert';
 
 function List() {
   const [apiToken, setApiToken] = useState(getSavedUser('api_token'));
   const [listPages, setListPages] = useState([]);
-
-  // useEffect(() => {
-  //   console.log('inicio do loadingPages');
-  //   getAllPages();
-  //   console.log('fim do loadingPages');
-  // }, []);
+  const [hashBase64, setHashBase64] = useState('');
+  const [responseApi, setResponseApi] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -66,24 +62,57 @@ function List() {
     );
   };
 
+  const handleChange = ({ target: { value } }, setState) => {
+    setState(value);
+  };
+
+  const handleButtonClickValidationBase64 = (e) => {
+    e.preventDefault();
+    if (listPages.length > 0) {
+      const pages = listPages.join().replace(/,/g, '');
+
+      // Converter para UTF-8
+      const encoder = new TextEncoder();
+      const utf8Array = encoder.encode(pages);
+
+      // Converter para Base64
+      const base64 = btoa(String.fromCharCode.apply(null, utf8Array));
+
+      setHashBase64(base64);
+
+      handleAlert('Base64 gerado com sucesso', 'success');
+    } else {
+      handleAlert('Não há pilares para gerar o Base64', 'error');
+    }
+  };
+
+  const handleButtonClickValidationResponseApi = async (e) => {
+    e.preventDefault();
+    if (hashBase64 !== '') {
+      const response = await postBase64Validation(apiToken, hashBase64);
+      console.log('Log response linha 98...', response); //TODO remover
+
+      if (
+        response.message ===
+        'Parabéns, você finalizou o teste técnico com sucesso!'
+      ) {
+        setResponseApi(response.message);
+        handleAlert('Finalizado com sucesso', 'success');
+      } else {
+        setResponseApi(response.message);
+        handleAlert('Erro ao validar Pilares', 'error');
+      }
+    } else {
+      handleAlert('Não há Base64 para validar', 'error');
+    }
+  };
+
   return (
     <section className="list_container">
       <AppBar />
       <div className="container_table">
         <h2 className="container_text_title">Pilares da cultura da FiqOn</h2>
         {renderTable()}
-        {/* <div className="container_button">
-          <Button
-            className="button_salvar"
-            variant="contained"
-            color="success"
-            value="validar Pilares"
-            // onClick={handleButtonClick}
-            type="submit"
-          >
-            Validar Pilares
-          </Button>
-        </div> */}
       </div>
       /
       <section className="container_validation-list">
@@ -95,7 +124,7 @@ function List() {
             variant="contained"
             color="success"
             value="validar Pilares"
-            // onClick={handleButtonClick}
+            onClick={handleButtonClickValidationBase64}
             type="submit"
           >
             Gerar Base64
@@ -103,15 +132,14 @@ function List() {
         </div>
 
         <div className="container_input_text">
-          {/* <h1>1º Hash</h1> */}
-          {/* <p>{pages}</p> */}
           <TextField
-            // error={errorEmail}
             id="outlined-basic"
             label="Hash Base 64"
             variant="outlined"
             className="input_email"
-            // onChange={(e) => handleChange(e, setEmail)}
+            value={hashBase64}
+            onChange={(e) => handleChange(e, setHashBase64)}
+            disabled // Definindo o campo como desativado
           />
         </div>
 
@@ -120,8 +148,8 @@ function List() {
             className="button_salvar"
             variant="contained"
             color="success"
-            value="validar Pilares"
-            // onClick={handleButtonClick}
+            value={'validar Pilares'}
+            onClick={handleButtonClickValidationResponseApi}
             type="submit"
           >
             Validar Pilares
@@ -129,15 +157,14 @@ function List() {
         </div>
 
         <div className="container_input_text">
-          {/* <h1>2º é valido?</h1> */}
-          {/* <p>{pages}</p> */}
           <TextField
-            // error={errorEmail}
             id="outlined-basic"
             label="Resposta API"
             variant="outlined"
             className="input_email"
-            // onChange={(e) => handleChange(e, setEmail)}
+            value={responseApi}
+            onChange={(e) => handleChange(e, setResponseApi)}
+            disabled // Definindo o campo como desativado
           />
         </div>
       </section>

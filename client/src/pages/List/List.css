@@ -17,15 +17,6 @@
   margin-top: 50px;
 }
 
-/* .container_button{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-} */
-
 .container_validation-list{
   display: flex;
   flex-direction: column;
@@ -42,14 +33,6 @@
 .container_button_validation {
   padding-bottom: 10px;
 }
-
-/* .container_basic_card {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 100px; 
-  width: 100%;
-  margin-top: 20px;
-} */
 
 .container_text_title{
   font-weight: normal;
@@ -69,18 +52,5 @@
   .container_input_text {
     width: 100%;
     padding-bottom: 30px;
-  }
-
-  .container_basic_card {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 30px; 
-  }
-  
-}
-
-@media screen and (min-width: 768px) and (max-width: 1600px) {
-  .container_basic_card {
-    gap: 20px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

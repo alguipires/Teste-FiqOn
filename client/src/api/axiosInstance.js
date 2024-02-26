@@ -52,4 +52,26 @@ const getPage = async (api_token, page) => {
     });
 };
 
-export { checkUser, getPage };
+const postBase64Validation = async (api_token, body) => {
+  return await axios
+    .post(
+      endpointPostDataValidation,
+      { answer: body },
+      {
+        params: {
+          api_token: api_token,
+        },
+      }
+    )
+    .then((response) => {
+      return response?.data;
+    })
+    .catch((error) => {
+      return error?.response?.data;
+    })
+    .finally(() => {
+      // always executed
+    });
+};
+
+export { checkUser, getPage, postBase64Validation };
