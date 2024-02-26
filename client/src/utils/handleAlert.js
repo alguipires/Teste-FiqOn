@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2';
 
 const handleAlert = (message, icon, position) => {
-  console.log('Logg... handleAlert...', message, icon, position);
   const Toast = Swal.mixin({
     toast: true,
     position: position || 'top-end',

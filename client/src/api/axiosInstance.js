@@ -11,7 +11,6 @@ const endpointPostDataValidation =
 
 const checkUser = async (email, password) => {
   const basicAuth = 'Basic ' + btoa(`${email}:${password}`);
-  console.log('Log basicAuth...', basicAuth);
 
   return await axios
     .post(

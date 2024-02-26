@@ -81,9 +81,7 @@ const FormLogin = () => {
   };
 
   const handleSubmitLogin = async () => {
-    console.log('Logg.... Handlesubmit...');
     const isValidUser = await checkUser(email, password);
-    console.log('Logg is valido token....... ', isValidUser);
 
     if (
       isValidUser.api_token !== undefined &&
